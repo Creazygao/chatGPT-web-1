@@ -13,12 +13,12 @@ const models = ref(['text-davinci-003', 'gpt-3.5-turbo'])
 
 const message = ref('')
 const api_key = useStorage('api_key', '')
-const chatModel = useStorage('model', 'text-davinci-003')
-const continuously = useStorage('continuously', false)
+const chatModel = useStorage('model', 'gpt-3.5-turbo')
+const continuously = useStorage('continuously', true)
 const messages = useStorage('messages', [
   {
     username: "chatGPT",
-    msg: "Hello, I'm chatGPT",
+    msg: "你好，有什么能帮助你的吗?",
     time: dayjs().format('HH:mm'),
     type: 0,
   },
@@ -87,8 +87,7 @@ onMounted(async () => {
   <div id="layout">
     <header id="header" class="bg-dark-50 text-white h-10 select-none">
       <LoadingOutlined v-if="loadding" class="pl-3 cursor-pointer" />
-      <span class="text-size-5 pl-5">chatGPT</span>
-      <span class="pl-3">代码领悟</span>
+      <span class="text-size-5 pl-5">GPT</span>
       <a-tooltip>
         <template #title>清除聊天记录</template>
         <a-popconfirm title="确定清除本地所有聊天记录吗?" ok-text="是的" cancel-text="再想想" @confirm="clearMessages">
@@ -108,7 +107,7 @@ onMounted(async () => {
       </a-select>
 
       <span class="float-right pr-3 pt-2">
-        当前余额：{{ summary?.total_available }}
+        余额：{{ summary?.total_available }}
         <a-tooltip>
           <template #title>刷新余额</template>
           <RedoOutlined @click="refushCredit" />
@@ -125,7 +124,7 @@ onMounted(async () => {
             <div class="flex-1 w-full self-center">
               <div class="relative px-3 py-1 m-auto flex flex-col">
                 <div class="mx-0 my-1 self-center text-xs text-gray-400">
-                  频道已创建
+                  GPT已连接
                 </div>
                 <div class="mx-0 my-1 self-center text-xs text-gray-400">
                   {{ createdAt }}
@@ -142,7 +141,7 @@ onMounted(async () => {
             @pressEnter="sendMessage"
             class="appearance-none pl-10 py-2 w-full bg-white border border-gray-300 rounded-full text-sm placeholder-gray-800 focus:outline-none focus:border-blue-500 focus:border-blue-500 focus:shadow-outline-blue" />
           <span class="absolute inset-y-0 right-0 bottom-8 pr-6 flex items-end">
-            <a-button shape="round" type="primary" @click="sendMessage">发送</a-button>
+            <a-button shape="round" type="primary" @click="sendMessage">sent</a-button>
           </span>
         </div>
 
